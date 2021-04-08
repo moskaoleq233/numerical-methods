@@ -1,0 +1,124 @@
+cout << endl << endl << "-------------------------------" <<
+
+        endl << "Аппроксимация " << endl;
+
+
+    double k = 4;
+
+        double x2[20] = { 29,23,0,12,47,36,24,37,32,43 };
+    double x4[10] = { };
+    double yyy4[10] = { };
+     double y2[20] = {3.8, 1.2, 1.6, 0.1, 8.2, 
+                      4.1, 5.3, 1.2, 1.7, 3.8};
+
+    double data[10][2]{ { 3.8,7.5 },{ 1.2,16.3 },{ 1.6,0.2 },{ 0.1,8.5 },{ 8.2,16.8 },{ 4.1,18.9 },{ 5.3,7.7 },{ 1.2,11.1 }, {1.7,9.6},{ 3.8,10.0 } };
+    double data[10][2]{ { 1, 0.2 },{ 2,7.5 },{ 3,7.7 },{ 4,8.5 },{ 5,9.6 },{ 6,10.0 },{ 7,11.1 },{ 8,16.3 }, {9,16.8},{ 10,18.9 } };
+
+     double det = 0;
+    for (int i = 0; i < 10; i++)
+    {
+
+        x4[i] = data[i][0];
+        yyy4[i] =data[i][1];
+
+    }
+
+    double sum4x = 0;
+    double sum3x = 0;
+    double sum2x = 0;
+    double sum1x = 0;
+    double sum2xy = 0;
+    double sumxy = 0;
+    double sumy = 0;
+    //double det = 0;
+    double det_a = 0;
+    double det_b = 0;
+    double det_c = 0;
+    const int Lenght = 10;
+    double d_a = 1,d_b = 1, d_c = 1;
+  
+
+    double pow4 = 1, pow3 = 1, pow2 = 1;
+    for (int k = 0; k < Lenght; k++)
+    {
+        for (int i = 1; i <= 4; i++)
+        {
+            pow4 *= x4[k];
+
+        }
+
+        sum4x += pow4;
+        pow4 = 1;
+    }
+    cout << "sum4= " << sum4x << endl;
+    for (int k = 0; k < Lenght; k++)
+    {
+        for (int i = 1; i <= 3; i++)
+        {
+            pow3 *= x4[k];
+
+        }
+
+        sum3x += pow3;
+        pow3 = 1;
+    }
+
+    cout << "sum3= " << sum3x << endl;
+    for (int k = 0; k < Lenght; k++)
+    {
+        for (int i = 1; i <= 2; i++)
+        {
+            pow2 *= x4[k];
+
+
+        }
+        
+        sum2x += pow2;
+        sum2xy += sum2x * yyy4[k];//1й элемент детерминанта по А
+        pow2 = 1;
+    }
+    cout << "sum2= " << sum2x << endl;
+
+    for (int i = 0; i < 10; i++)
+    {
+        sum1x += x4[i];
+        sumxy += sum1x * yyy4[i];//элемент 2й строки 1го столбца детерминанта а
+        sumy += yyy4[i];//элемент 3й строки 1го столбца детерминанта а
+
+    }
+    cout << "sum1= " << sum1x << endl;
+    
+    
+    
+    cout << "sum4x= " << sum4x << endl <<
+        "sum3x= " << sum3x << endl <<
+        "sum2x= " << sum2x << endl <<
+        "sum1x= " << sum1x << endl <<
+        "sum2xy= " << sum2xy << endl <<
+        "sumxy= " << sumxy << endl <<
+        "sumy= " << sumy << endl;
+   
+    det = sum4x * sum2x * 10 + sum3x * sum1x * sum2x + sum1x * sum3x * sum2x 
+        - sum2x * sum2x * sum2x - sum1x * sum1x * sum4x - sum3x * sum3x * 10;
+    cout << endl << "DET= " << det;
+ 
+    det_a = sum2xy * sum2x * 10 + sumxy * sum1x * sum2x + sum3x * sum1x * sumy
+        - sumy * sum2x * sum2x - sum1x * sum1x * sum2xy - sumxy * sum3x * 10;
+    cout << endl << "DET_A= " << det_a;
+
+
+    det_b = sum4x * sumxy * 10 + sum3x * sumy * sum2x + sum2xy * sum1x * sum2x
+        - sum2x * sumxy * sum2x - sum1x * sumy * sum4x - sum2xy * sum3x * 10;
+    cout << endl << "DET_B= " << det_b;
+
+
+    det_c = sum4x * sum2x * 10 + sum3x * sum1x * sum2xy + sum3x * sumxy * sum2x
+        - sum2x * sum2x * sum2xy - sum1x * sumxy * sum4x - sum3x * sum3x * 10;
+    cout << endl << "DET_C= " << det_c;
+    cout << endl;
+    d_a = det_a / det;
+    d_b = det_b / det;
+    d_c = det_c / det;
+    cout << "a= "<<d_a<<endl;
+    cout << "b= " << d_b << endl;
+    cout << "c= " << d_c << endl;
