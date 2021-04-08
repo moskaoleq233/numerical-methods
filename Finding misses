@@ -1,0 +1,81 @@
+cout << "=================  ПРОМАХИ   ================"<<endl;
+
+
+   // double data[Length][2]{ { 1, 0.2 },{ 2,7.5 },{ 3,7.7 },{ 4,8.5 },{ 5,9.6 },{ 6,10.0 },{ 7,11.1 },{ 8,16.3 }, {9,16.8},{ 10,18.9 } };
+
+    double x5[10] = { 1,2,3,4,5,6,7,8,9,10 };
+    double y5[10] = {0.2, 7.5, 7.7, 8.5, 9.6, 10.0, 11.1, 16.3, 16.8, 18.9 };
+    
+    int n2 = 10;
+    double a5=1, b5=1;
+    double sum_x5 = 0, sum_y5 = 0, sum_5xy=0, sum_x52 = 0, sum_yx = 0;;
+    double sigma = 0;//сигма по формуле где корень
+      double sum_promax = 0;//сумма под корнем
+      double xx = 0;//х штрих
+      double prosto = 0;
+
+     for (int i = 0; i < n2; i++)
+          xx += x5[i];
+      xx /= n2;
+      for (int i = 0; i < n2; i++)
+          sum_promax += (x5[i] - xx)* (x5[i] - xx);
+      sum_promax /= n2;
+      sigma = sqrt(sum_promax);
+      cout <<"sigma10 "<< sigma<<endl;
+      cout << (xx + (3 * sigma)) << endl;
+     cout << (xx - (3 * sigma))<<endl;
+     cout << endl;
+
+     xx = 0;
+     sum_promax = 0;
+     sigma = 0;
+     for (int i = 0; i < n2-1; i++)
+         xx += x5[i];
+     xx /= n2;
+     for (int i = 0; i < n2-1; i++)
+         sum_promax += (x5[i] - xx) * (x5[i] - xx);
+     sum_promax /= n2-1;
+     sigma = sqrt(sum_promax);
+     cout << "sigma9 " << sigma << endl;
+     cout << (xx + (3 * sigma)) << endl;
+     cout << (xx - (3 * sigma)) << endl;
+
+
+
+
+
+
+
+
+
+    
+
+ for (int i = 0; i < n2; i++)
+{
+     sum_x5 += 1 / x5[i];//1/x[i]
+     sum_y5 += y5[i];//сумма для второго числа в числителе Б
+     sum_x52 += (1 / x5[i]) * (1 / x5[i]);
+     sum_yx += y5[i] / x5[i];
+}
+
+ double chisl = 0;
+chisl= sum_y5* sum_x52 - sum_x5 * sum_yx;
+
+ 
+ 
+
+double znam = 0;
+znam=sum_x52* n2 - sum_x5 * sum_x5;
+
+ a5 = chisl / znam;
+ cout <<"a=: "<< a5;
+ cout << endl;
+ chisl = 0;
+ chisl = n * sum_yx - sum_x5 * sum_y5;
+ 
+ b = chisl / znam;
+ cout << "b5:" << b5;
+
+
+
+}
